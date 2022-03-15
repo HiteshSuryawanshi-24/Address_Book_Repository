@@ -3,7 +3,7 @@ package com.hitesh.Address_Book;
 import java.util.Scanner;
 
 public class AddressBook {
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
     Contact contact = new Contact();
 
     void addContact(){
@@ -55,12 +55,30 @@ public class AddressBook {
         System.out.println("Contact List :");
         System.out.println(contact.toString());
     }
-
     public static void main(String[] args) {
         AddressBook addressBook = new AddressBook();
-        addressBook.addContact();
-        addressBook.showContact();
-        addressBook.editContact();
-        addressBook.showContact();
+        int choice;
+        do {
+            System.out.println("**WELCOME TO ADDRESS_BOOK MANAGER**");
+            System.out.println("1.ADD NEW CONTACT\n2.EDIT CONTACT\n3.SHOW CONTACT\n4.EXIT");
+            System.out.println("Enter Your Choice No");
+            choice =sc.nextInt();
+            switch (choice){
+                case 1:
+                    addressBook.addContact();
+                    break;
+                case 2:
+                    addressBook.editContact();
+                    break;
+                case 3:
+                    addressBook.showContact();
+                    break;
+                case 4:
+                    break;
+                default:
+                    System.out.println("Invalid Choice No");
+            }
+        }while (choice != 4);
+
     }
 }
