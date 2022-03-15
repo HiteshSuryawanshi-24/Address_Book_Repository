@@ -52,15 +52,29 @@ public class AddressBook {
         }
     }
     void showContact(){
-        System.out.println("Contact List :");
-        System.out.println(contact.toString());
+        try {
+            System.out.println(contact.toString());
+        }catch (NullPointerException np){
+            System.out.println("Contact Not Found !!");
+        }
+    }
+    void deleteContact(){
+        System.out.println("Enter the FirstName to check Contact");
+        String name = sc.next();
+            if (name.equalsIgnoreCase(contact.getFirstname())){
+                System.out.println("Contact Found !");
+                contact = null;
+                System.out.println("Contact Deleted Successfully !");
+            }else {
+                System.out.println("Contact Not Found !");
+            }
     }
     public static void main(String[] args) {
         AddressBook addressBook = new AddressBook();
         int choice;
         do {
             System.out.println("**WELCOME TO ADDRESS_BOOK MANAGER**");
-            System.out.println("1.ADD NEW CONTACT\n2.EDIT CONTACT\n3.SHOW CONTACT\n4.EXIT");
+            System.out.println("1.ADD NEW CONTACT\n2.EDIT CONTACT\n3.SHOW CONTACT\n4.DELETE CONTACT\n5.EXIT");
             System.out.println("Enter Your Choice No");
             choice =sc.nextInt();
             switch (choice){
@@ -74,11 +88,14 @@ public class AddressBook {
                     addressBook.showContact();
                     break;
                 case 4:
+                    addressBook.deleteContact();
+                    break;
+                case 5:
                     break;
                 default:
                     System.out.println("Invalid Choice No");
             }
-        }while (choice != 4);
+        }while (choice != 5);
 
     }
 }
