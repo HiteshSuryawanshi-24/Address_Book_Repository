@@ -54,24 +54,21 @@ public class AddressBook {
 //            System.out.println("Contact Not Found !");
 //        }
 //    }
-//    void showContact(){
-//        try {
-//            System.out.println(contact.toString());
-//        }catch (NullPointerException np){
-//            System.out.println("Contact Not Found !!");
-//        }
-//    }
-//    void deleteContact(){
-//        System.out.println("Enter the FirstName to check Contact");
-//        String name = sc.next();
-//            if (name.equalsIgnoreCase(contact.getFirstname())){
-//                System.out.println("Contact Found !");
-//                contact = null;
-//                System.out.println("Contact Deleted Successfully !");
-//            }else {
-//                System.out.println("Contact Not Found !");
-//            }
-//    }
+    void deleteContact(){
+        System.out.println("Enter the FirstName to check Contact");
+        String name = sc.next();
+        for (int i=0 ; i < addressBookList.size(); i++)
+        {
+            Contact contact = addressBookList.get(i);
+            if (name.equalsIgnoreCase(contact.getFirstname())){
+                System.out.println("Contact Found !");
+                addressBookList.remove(i);
+                System.out.println("Contact Deleted Successfully !");
+            }else {
+                System.out.println("Contact Not Found !");
+            }
+        }
+    }
     void showContact(){
         for (int i =0 ; i < addressBookList.size() ; i++ ){
             Contact contact = addressBookList.get(i);
@@ -97,7 +94,7 @@ public class AddressBook {
                     addressBook.showContact();
                     break;
                 case 4:
-                   // addressBook.deleteContact();
+                    addressBook.deleteContact();
                     break;
                 case 5:
                     break;
