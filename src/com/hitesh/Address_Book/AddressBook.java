@@ -11,49 +11,57 @@ public class AddressBook {
         Contact contact = new Contact();
         System.out.println("Enter the First Name :");
         contact.setFirstname(sc.next());
-        System.out.println("Enter the Last Name :");
-        contact.setLastname(sc.next());
-        System.out.println("Enter the Address :");
-        contact.setAddress(sc.next());
-        System.out.println("Enter the City :");
-        contact.setCity(sc.next());
-        System.out.println("Enter the State :");
-        contact.setState(sc.next());
-        System.out.println("Enter the ZipNo :");
-        contact.setZipno(sc.next());
-        System.out.println("Enter the MobileNo :");
-        contact.setMobileno(sc.next());
-        System.out.println("Enter the EmailId :");
-        contact.setEmailid(sc.next());
-        addressBookList.add(contact);
+        if (checkContact(contact.getFirstname())){
+            System.out.println("Contact is Already Exist !");
+        }else{
+            System.out.println("Enter the Last Name :");
+            contact.setLastname(sc.next());
+            System.out.println("Enter the Address :");
+            contact.setAddress(sc.next());
+            System.out.println("Enter the City :");
+            contact.setCity(sc.next());
+            System.out.println("Enter the State :");
+            contact.setState(sc.next());
+            System.out.println("Enter the ZipNo :");
+            contact.setZipno(sc.next());
+            System.out.println("Enter the MobileNo :");
+            contact.setMobileno(sc.next());
+            System.out.println("Enter the EmailId :");
+            contact.setEmailid(sc.next());
+            addressBookList.add(contact);
+        }
     }
-//    void editContact(){
-//        System.out.println("Enter the First Name to Check Contact :");
-//        String name = sc.next();
-//        if (name.equalsIgnoreCase(contact.getFirstname()))
-//        {
-//            System.out.println("Contact Found !");
-//            System.out.println("Enter the First Name :");
-//            contact.setFirstname(sc.next());
-//            System.out.println("Enter the Last Name :");
-//            contact.setLastname(sc.next());
-//            System.out.println("Enter the Address :");
-//            contact.setAddress(sc.next());
-//            System.out.println("Enter the City :");
-//            contact.setCity(sc.next());
-//            System.out.println("Enter the State :");
-//            contact.setState(sc.next());
-//            System.out.println("Enter the ZipNo :");
-//            contact.setZipno(sc.next());
-//            System.out.println("Enter the MobileNo :");
-//            contact.setMobileno(sc.next());
-//            System.out.println("Enter the EmailId :");
-//            contact.setEmailid(sc.next());
-//
-//        }else {
-//            System.out.println("Contact Not Found !");
-//        }
-//    }
+    void editContact(){
+        System.out.println("Enter the First Name to Check Contact :");
+        String name = sc.next();
+            boolean found = false;
+            Contact contact = null;
+            for (int i =0 ; i < addressBookList.size(); i++) {
+                contact = addressBookList.get(i);
+                if (name.equalsIgnoreCase(contact.getFirstname())) {
+                    found = true;
+                }
+            }
+            if (found) {
+                System.out.println("Contact Found !");
+                System.out.println("Enter the Last Name :");
+                contact.setLastname(sc.next());
+                System.out.println("Enter the Address :");
+                contact.setAddress(sc.next());
+                System.out.println("Enter the City :");
+                contact.setCity(sc.next());
+                System.out.println("Enter the State :");
+                contact.setState(sc.next());
+                System.out.println("Enter the ZipNo :");
+                contact.setZipno(sc.next());
+                System.out.println("Enter the MobileNo :");
+                contact.setMobileno(sc.next());
+                System.out.println("Enter the EmailId :");
+                contact.setEmailid(sc.next());
+            }else {
+                System.out.println("Contact Not Found !");
+            }
+    }
     void deleteContact(){
         System.out.println("Enter the FirstName to check Contact");
         String name = sc.next();
@@ -75,6 +83,17 @@ public class AddressBook {
             System.out.println(contact.toString());
         }
     }
+    public boolean checkContact(String firstname){
+        boolean flag = false;
+        for (int i = 0; i < addressBookList.size(); i++) {
+            Contact contact = addressBookList.get(i);
+            if (firstname.equalsIgnoreCase(contact.getFirstname())){
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
     public static void main(String[] args) {
         AddressBook addressBook = new AddressBook();
         int choice;
@@ -88,7 +107,7 @@ public class AddressBook {
                     addressBook.addContact();
                     break;
                 case 2:
-                    //addressBook.editContact();
+                    addressBook.editContact();
                     break;
                 case 3:
                     addressBook.showContact();
