@@ -1,12 +1,14 @@
 package com.hitesh.Address_Book;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook {
     static Scanner sc = new Scanner(System.in);
-    Contact contact = new Contact();
-
+//    Contact contact = new Contact();
+    ArrayList<Contact> addressBookList = new ArrayList<>();
     void addContact(){
+        Contact contact = new Contact();
         System.out.println("Enter the First Name :");
         contact.setFirstname(sc.next());
         System.out.println("Enter the Last Name :");
@@ -23,51 +25,58 @@ public class AddressBook {
         contact.setMobileno(sc.next());
         System.out.println("Enter the EmailId :");
         contact.setEmailid(sc.next());
+        addressBookList.add(contact);
     }
-    void editContact(){
-        System.out.println("Enter the First Name to Check Contact :");
-        String name = sc.next();
-        if (name.equalsIgnoreCase(contact.getFirstname()))
-        {
-            System.out.println("Contact Found !");
-            System.out.println("Enter the First Name :");
-            contact.setFirstname(sc.next());
-            System.out.println("Enter the Last Name :");
-            contact.setLastname(sc.next());
-            System.out.println("Enter the Address :");
-            contact.setAddress(sc.next());
-            System.out.println("Enter the City :");
-            contact.setCity(sc.next());
-            System.out.println("Enter the State :");
-            contact.setState(sc.next());
-            System.out.println("Enter the ZipNo :");
-            contact.setZipno(sc.next());
-            System.out.println("Enter the MobileNo :");
-            contact.setMobileno(sc.next());
-            System.out.println("Enter the EmailId :");
-            contact.setEmailid(sc.next());
-
-        }else {
-            System.out.println("Contact Not Found !");
-        }
-    }
+//    void editContact(){
+//        System.out.println("Enter the First Name to Check Contact :");
+//        String name = sc.next();
+//        if (name.equalsIgnoreCase(contact.getFirstname()))
+//        {
+//            System.out.println("Contact Found !");
+//            System.out.println("Enter the First Name :");
+//            contact.setFirstname(sc.next());
+//            System.out.println("Enter the Last Name :");
+//            contact.setLastname(sc.next());
+//            System.out.println("Enter the Address :");
+//            contact.setAddress(sc.next());
+//            System.out.println("Enter the City :");
+//            contact.setCity(sc.next());
+//            System.out.println("Enter the State :");
+//            contact.setState(sc.next());
+//            System.out.println("Enter the ZipNo :");
+//            contact.setZipno(sc.next());
+//            System.out.println("Enter the MobileNo :");
+//            contact.setMobileno(sc.next());
+//            System.out.println("Enter the EmailId :");
+//            contact.setEmailid(sc.next());
+//
+//        }else {
+//            System.out.println("Contact Not Found !");
+//        }
+//    }
+//    void showContact(){
+//        try {
+//            System.out.println(contact.toString());
+//        }catch (NullPointerException np){
+//            System.out.println("Contact Not Found !!");
+//        }
+//    }
+//    void deleteContact(){
+//        System.out.println("Enter the FirstName to check Contact");
+//        String name = sc.next();
+//            if (name.equalsIgnoreCase(contact.getFirstname())){
+//                System.out.println("Contact Found !");
+//                contact = null;
+//                System.out.println("Contact Deleted Successfully !");
+//            }else {
+//                System.out.println("Contact Not Found !");
+//            }
+//    }
     void showContact(){
-        try {
+        for (int i =0 ; i < addressBookList.size() ; i++ ){
+            Contact contact = addressBookList.get(i);
             System.out.println(contact.toString());
-        }catch (NullPointerException np){
-            System.out.println("Contact Not Found !!");
         }
-    }
-    void deleteContact(){
-        System.out.println("Enter the FirstName to check Contact");
-        String name = sc.next();
-            if (name.equalsIgnoreCase(contact.getFirstname())){
-                System.out.println("Contact Found !");
-                contact = null;
-                System.out.println("Contact Deleted Successfully !");
-            }else {
-                System.out.println("Contact Not Found !");
-            }
     }
     public static void main(String[] args) {
         AddressBook addressBook = new AddressBook();
@@ -82,13 +91,13 @@ public class AddressBook {
                     addressBook.addContact();
                     break;
                 case 2:
-                    addressBook.editContact();
+                    //addressBook.editContact();
                     break;
                 case 3:
                     addressBook.showContact();
                     break;
                 case 4:
-                    addressBook.deleteContact();
+                   // addressBook.deleteContact();
                     break;
                 case 5:
                     break;
@@ -96,6 +105,5 @@ public class AddressBook {
                     System.out.println("Invalid Choice No");
             }
         }while (choice != 5);
-
     }
 }
