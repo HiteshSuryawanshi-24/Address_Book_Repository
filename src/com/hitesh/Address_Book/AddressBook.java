@@ -94,8 +94,8 @@ public class AddressBook {
         }
         return flag;
     }
-    public static void main(String[] args) {
-        AddressBook addressBook = new AddressBook();
+     void addressBookMenu(AddressBook addressBook) {
+        //AddressBook addressBook = new AddressBook();
         int choice;
         do {
             System.out.println("**WELCOME TO ADDRESS_BOOK MANAGER**");
