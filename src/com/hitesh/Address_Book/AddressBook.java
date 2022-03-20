@@ -94,12 +94,25 @@ public class AddressBook {
         }
         return flag;
     }
+    void checkfoundPerson(){
+        System.out.println("Enter the City Name to Count Person:");
+        String cityname =sc.next();
+        int count =0;
+        for (int i =0 ;  i < addressBookList.size(); i++){
+            Contact contact = addressBookList.get(i);
+            if (cityname.equalsIgnoreCase(contact.getCity()))
+            {
+                count++;
+            }
+        }
+        System.out.println("Total Person From "+cityname+" : "+count);
+    }
      void addressBookMenu(AddressBook addressBook) {
         //AddressBook addressBook = new AddressBook();
         int choice;
         do {
             System.out.println("**WELCOME TO ADDRESS_BOOK MANAGER**");
-            System.out.println("1.ADD NEW CONTACT\n2.EDIT CONTACT\n3.SHOW CONTACT\n4.DELETE CONTACT\n5.EXIT");
+            System.out.println("1.ADD NEW CONTACT\n2.EDIT CONTACT\n3.SHOW CONTACT\n4.DELETE CONTACT\n5.Count Contact from City\n6.EXIT");
             System.out.println("Enter Your Choice No");
             choice =sc.nextInt();
             switch (choice){
@@ -116,10 +129,13 @@ public class AddressBook {
                     addressBook.deleteContact();
                     break;
                 case 5:
+                    addressBook.checkfoundPerson();
+                    break;
+                case 6:
                     break;
                 default:
                     System.out.println("Invalid Choice No");
             }
-        }while (choice != 5);
+        }while (choice != 6);
     }
 }
