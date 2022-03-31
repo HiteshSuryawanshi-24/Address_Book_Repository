@@ -1,5 +1,8 @@
 package com.hitesh.Address_Book;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -49,14 +52,42 @@ public class AddressBookMaster {
             }
         } catch (IOException ioe) {}
     }
+    public void restoreAddressBook()throws IOException {
+        System.out.println("Enter the Addressbook Name to Restore : ");
+        String addressBookName = sc.next();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(addressBookName+".txt"));
+            String line;
+            AddressBook addressBook = new AddressBook();
+            while((line = br.readLine())!=null) {
+                System.out.println(line);
+                String[] contacData = line.split(",");
+                Contact contact = new Contact();
+                contact.setFirstname(contacData[0]);
+                contact.setLastname(contacData[1]);
+                contact.setAddress(contacData[2]);
+                contact.setCity(contacData[3]);
+                contact.setState(contacData[4]);
+                contact.setZipno(contacData[5]);
+                contact.setMobileno(contacData[6]);
+                contact.setEmailid(contacData[7]);
+                addressBook.addressBookList.add(contact);
+            }
+            addressBookMap.put(addressBookName,addressBook);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         int choice;
         AddressBookMaster addressBookMaster = new AddressBookMaster();
         do {
             System.out.println("***ADDRESS BOOK MANAGER***");
             System.out.println("1.ADD NEW ADDRESS BOOK\n2.EDIT ADDRESS BOOK\n3.DISPLAY ADDRESS BOOK\n" +
-                    "4.SELECT ADDRESS BOOK\n5.BACKUP\n6.EXIT");
+                    "4.SELECT ADDRESS BOOK\n5.BACKUP\n6.RESTORE\n7.EXIT");
             System.out.println("Enter the Operation No : ");
             choice = sc.nextInt();
             switch (choice){
@@ -72,14 +103,16 @@ public class AddressBookMaster {
                     addressBookMaster.selectAddressBook();
                     break;
                 case 5:
-                    break;
-                case 6:
                     addressBookMaster.backupAddressBook();
                     break;
+                case 6:
+                    addressBookMaster.restoreAddressBook();
+                    break;
+
                 default:
                     System.out.println("Invalid Operation No:");
                     break;
             }
-        }while (choice !=6);
+        }while (choice !=7);
     }
 }
